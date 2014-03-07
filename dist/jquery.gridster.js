@@ -1121,16 +1121,17 @@
     * @param {Function} [callback] Function executed when the widget is removed.
     * @return {HTMLElement} Returns $widget.
     */
-    fn.resize_widget = function($widget, size_x, size_y, ncol, nrow, callback) {
+    fn.resize_widget = function($widget, size_x, size_y, callback, ncol, nrow) {
         var wgd = $widget.coords().grid;
         var col = wgd.col;
         var max_cols = this.options.max_cols;
         var old_size_y = wgd.size_y;
         var old_col = wgd.col;
         var new_col = old_col;
-
+        var new_row = wgd.row;
+        
         if(ncol){ new_col = ncol; }
-        if(nrow){ wgd.row = nrow; }
+        if(nrow){ new_row = nrow; }
 
         size_x || (size_x = wgd.size_x);
         size_y || (size_y = wgd.size_y);
@@ -1150,7 +1151,7 @@
 
         var new_grid_data = {
             col: new_col,
-            row: wgd.row,
+            row: new_row,
             size_x: size_x,
             size_y: size_y
         };
