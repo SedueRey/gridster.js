@@ -1121,13 +1121,16 @@
     * @param {Function} [callback] Function executed when the widget is removed.
     * @return {HTMLElement} Returns $widget.
     */
-    fn.resize_widget = function($widget, size_x, size_y, callback) {
+    fn.resize_widget = function($widget, size_x, size_y, ncol, nrow, callback) {
         var wgd = $widget.coords().grid;
         var col = wgd.col;
         var max_cols = this.options.max_cols;
         var old_size_y = wgd.size_y;
         var old_col = wgd.col;
         var new_col = old_col;
+
+        if(ncol){ new_col = ncol; }
+        if(nrow){ wgd.row = nrow; }
 
         size_x || (size_x = wgd.size_x);
         size_y || (size_y = wgd.size_y);
